@@ -19,21 +19,31 @@ public class WebServer {
     public void init() {
 
         try {
-            System.out.println("Creating a socket");
-            serverSocket = new ServerSocket(8080);
+                System.out.println("Creating a socket");
+                serverSocket = new ServerSocket(8080);
 
-            clientSocket = serverSocket.accept();
+            while (true) {
+                clientSocket = serverSocket.accept();
 
-            System.out.println("Creating a buffered reader and an output stream");
-            bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
+                System.out.println("Creating a buffered reader and an output stream");
+                bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
 
-            start();
+                start();
 
-            closeConnections();
+                closeConnections();
+            }
+
+            //
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                serverSocket.close();
+            } catch (IOException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -115,6 +125,7 @@ public class WebServer {
             dataOutputStream.close();
             bufferedReader.close();
             clientSocket.close();
+
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {

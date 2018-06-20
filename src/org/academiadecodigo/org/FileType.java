@@ -6,7 +6,8 @@ package org.academiadecodigo.org;
 public enum FileType {
     HTML("html", "Content-Type: text/html; charset=UTF-8\r\n"),
     JPEG("jpeg", "Content-Type: image/jpeg\r\n)"),
-    PNG("png", "Content-Type: image/png\r\n");
+    PNG("png", "Content-Type: image/png\r\n"),
+    ICO("ico", "Content-Type: image/x-icon\r\n");
 
     private String contentType;
     private String extension;
