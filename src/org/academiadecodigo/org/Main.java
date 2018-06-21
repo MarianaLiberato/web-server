@@ -5,9 +5,8 @@ package org.academiadecodigo.org;
  */
 public class Main {
     public static void main(String[] args) {
-        WebServer webServer = new WebServer();
-        //while (true) {
+        WebServer webServer = new WebServer(60000);
             webServer.init();
-        //}
+            webServer.start();
     }
 }
